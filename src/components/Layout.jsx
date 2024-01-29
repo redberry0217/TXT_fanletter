@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
+import MemberClicked from "./MemberClicked"
+import { useState } from "react";
 
 const TitleBox = styled.div`
   margin: 0;
@@ -12,7 +14,7 @@ const TitleBox = styled.div`
 `;
 
 const TitlefontColor = styled.span`
-  color: #3b98b5;
+  color: #4b85d0;
 `;
 
 const H1Style = styled.h1`
@@ -22,6 +24,8 @@ const H1Style = styled.h1`
 `;
 
 function Layout(props) {
+  const [activeMember, setActiveMember] = useState('');
+
   return (
     <>
       <TitleBox>
@@ -30,8 +34,8 @@ function Layout(props) {
           <TitlefontColor>TOMORROW X TOGETHER</TitlefontColor>
         </H1Style>
       </TitleBox>
-      <HeaderMenu />
-      {props.children}
+      <HeaderMenu activeMember={activeMember} setActiveMember={setActiveMember}/>
+      <MemberClicked activeMember={activeMember}/>
     </>
   );
 }

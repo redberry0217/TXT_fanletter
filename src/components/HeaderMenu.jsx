@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 const MenuBackground = styled.div`
   background: linear-gradient(90deg, #b0d0ff, #d1eee0);
@@ -13,26 +12,26 @@ const MenuBackground = styled.div`
 const MemberBox = styled.div`
   height: 20px;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 10px; 
   font-weight: bold;
   letter-spacing: 2px;
   cursor: pointer;
-
+  color: ${(props) => (props.$isActive ? "#4b85d0" : "black")};
 `;
+
 const Members = ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN", "HUENINGKAI"];
 
-function HeaderMenu() {
-  const navigate = useNavigate();
-  const handleMemberClick = (member) => {
-    navigate(`/${member.toLowerCase()}`);
-  };
+function HeaderMenu({activeMember, setActiveMember} ) {
 
   return (
     <>
       <MenuBackground>
         {Members.map((member, index) => (
           <React.Fragment key={index}>
-            <MemberBox onClick={() => handleMemberClick(member)}>
+            <MemberBox
+              onClick={() => setActiveMember(member)}
+              $isActive={activeMember === member}
+            >
               {member}
             </MemberBox>
             {index !== Members.length - 1 && <span>|</span>}
