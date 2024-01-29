@@ -22,11 +22,14 @@ const NickName = styled.p`
 const Letter = styled.p`
     font-size: 20pt;
     line-height: 1.2;
+    margin-top: 15px;
+    margin-bottom: 15px;
 `
 
 const WriteDate = styled.p`
     text-align: right;
     line-height: 0.1;
+    margin-top: 35px;
 `
 
 function LetterList() {

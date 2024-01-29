@@ -1,13 +1,12 @@
-import Layout from "./components/Layout.jsx";
-import FanletterPage from "components/FanletterPage.jsx"
 import GlobalStyle from "GlobalStyle.jsx";
+import Router from "shared/Router.js";
+import Reset from "reset.css";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Layout />
-      <FanletterPage />
+      <Router />
     </>
   );
 }
