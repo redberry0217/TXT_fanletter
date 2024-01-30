@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const WriteBox = styled.div`
-  margin-top: 35px;
   width: 650px;
   background-color: #e9f7ff;
   border-radius: 20px;
@@ -53,7 +52,12 @@ const SubmitBtnBox = styled.div`
   display: flex;
   justify-content: center;
 `;
-function WriteForm() {
+function AddForm() {
+
+  const [nickname, setNickname] = useState('');
+  const [writedTo, setWritedTo] = useState('');
+  const [content, setContent] = useState('');
+
   return (
     <WriteBox>
       <form>
@@ -62,6 +66,8 @@ function WriteForm() {
           type="text"
           placeholder="최대 20자 입력 가능"
           maxLength="20"
+          value={nickname}
+          onChange={(e)=>setNickname(e.target.value)}
           />
           받는 멤버
           <StyledSelect>
@@ -87,4 +93,4 @@ function WriteForm() {
   );
 }
 
-export default WriteForm;
+export default AddForm;

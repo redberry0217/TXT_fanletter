@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import fakeData from "fakeData.json"
 
 const MenuBackground = styled.div`
   background: linear-gradient(90deg, #b0d0ff, #d1eee0);
@@ -21,7 +22,10 @@ const MemberBox = styled.div`
 
 const Members = ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN", "HUENINGKAI"];
 
-function HeaderMenu({activeMember, setActiveMember} ) {
+function HeaderMenu({ activeMember, setActiveMember } ) {
+  useEffect(() => {
+    setActiveMember("SOOBIN");
+  }, []);
 
   return (
     <>
@@ -34,7 +38,7 @@ function HeaderMenu({activeMember, setActiveMember} ) {
             >
               {member}
             </MemberBox>
-            {index !== Members.length - 1 && <span>|</span>}
+            {index !== Members.length - 1 && <span>ㅣ</span>}
           </React.Fragment>
         ))}
       </MenuBackground>
