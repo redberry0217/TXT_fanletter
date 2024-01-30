@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import fakeData from "fakeData.json"
 
 const MenuBackground = styled.div`
   background: linear-gradient(90deg, #b0d0ff, #d1eee0);
