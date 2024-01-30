@@ -1,12 +1,11 @@
 import GlobalStyle from "GlobalStyle.jsx";
-import Layout from "components/Layout";
-import Reset from "reset.css";
+import Router from "shared/Router";
 
 function App() {
   return (
     <>
+      <Router />
       <GlobalStyle />
-      <Layout />
     </>
   );
 }

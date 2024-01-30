@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const LetterCard = styled.div`
@@ -41,19 +42,26 @@ const WriteDate = styled.p`
 `;
 
 function LetterList({ activeMember, letters }) {
+  const navigate = useNavigate();
+
   /** 클릭한 멤버에게 쓴 팬레터만 필터링 */
   const filteredLetters = letters.filter(
     (letter) => letter.writedTo === activeMember
   );
-  console.log("---그냥레터스---", letters);
-  console.log("---멤버필터링---", filteredLetters);
+
+  const handleCardClick = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   return (
     <section>
       {filteredLetters
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .map((letter) => (
-          <LetterCard key={letter.id}>
+          <LetterCard
+            key={letter.id}
+            onClick={() => handleCardClick(letter.id, letters)}
+          >
             <div>
               <img src={letter.avatar} alt="사용자 아바타" width="50" />
             </div>
