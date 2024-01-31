@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
+import WriterDetail from "components/WriterDetail";
 
 const DetailBackground = styled.div`
   background-color: #e9f7ff;
@@ -29,25 +30,6 @@ const DetailCard = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: column;
-`;
-
-const WriteInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-`;
-
-const NicknameStyle = styled.div`
-  width: 250px;
-  margin-left: 20px;
-  font-weight: bold;
-`;
-
-const CreateAtStyle = styled.div`
-  margin-left: 230px;
-  font-weight: bold;
-  color: gray;
 `;
 
 const LineStyle = styled.div`
@@ -102,10 +84,12 @@ function Detail({ letters, setLetters }) {
     navigate(`/`);
   }
 
+  /** 뒤로가기 버튼  */
   const handleGobackClick = () => {
     navigate(`/`);
   };
 
+  /** 삭제하기 버튼 */
   const handleDelete = (id) => {
     const deleteConfirm = window.confirm("팬레터를 삭제하시겠습니까?");
     if (deleteConfirm) {
@@ -118,25 +102,30 @@ function Detail({ letters, setLetters }) {
       return;
     }
   };
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState("");
 
+  /** 수정하기 버튼 */
   const handleEditClick = () => {
     setIsEditing(true);
     setEditedContent(letter.content);
   };
 
+  /** 수정하기 화면에서 저장하기 버튼 */
   const handleSaveClick = () => {
+    // 입력된 값이 없을 때
     if (!editedContent) {
       alert("내용을 입력해주세요.");
       return;
     }
-
+    // 변경된 내용이 없을 때
     if (editedContent.trim() === letter.content.trim()) {
       alert("변경된 내용이 없습니다.");
       return;
     }
-    // 클라이언트 측에서만 상태를 업데이트하는 예시입니다.
+
+    // 변경된 내용이 있을 때
     setLetters((prevLetters) => {
       const updatedLetters = prevLetters.map((item) => {
         if (item.id === letter.id) {
@@ -151,6 +140,7 @@ function Detail({ letters, setLetters }) {
     setEditedContent("");
   };
 
+  /** 수정하기 화면에서 취소하기 버튼 */
   const handleCancelClick = () => {
     const cancelConfirm = window.confirm("팬레터 수정을 취소합니다.");
     if (cancelConfirm) {
@@ -166,18 +156,7 @@ function Detail({ letters, setLetters }) {
         from MOA to <TxT>TOMORROW X TOGETHER</TxT>
       </DetailTitle>
       <DetailCard>
-        <WriteInfo>
-          <img
-            src={
-              letter.avatar.startsWith("http")
-                ? letter.avatar
-                : `/${letter.avatar}`
-            }
-            width="50"
-          />
-          <NicknameStyle>{letter.nickname}</NicknameStyle>
-          <CreateAtStyle>{formatDate(letter.createdAt)}</CreateAtStyle>
-        </WriteInfo>
+        <WriterDetail letter={letter} />
         <LineStyle />
         <WritedToStyle>
           TO : <TxT>{letter.writedTo}</TxT>
@@ -212,17 +191,5 @@ function Detail({ letters, setLetters }) {
     </DetailBackground>
   );
 }
-
-const formatDate = (dateString) => {
-  const options = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  };
-  const date = new Date(dateString);
-  return date.toLocaleDateString("ko-KR", options);
-};
 
 export default Detail;
