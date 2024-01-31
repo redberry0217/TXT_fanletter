@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import NoLettersYet from "./NoLettersYet";
 
 const LetterCard = styled.div`
   border: 1px solid gray;
@@ -41,37 +42,40 @@ const WriteDate = styled.p`
   margin-top: 35px;
 `;
 
-function LetterList({ activeMember, letters }) {
+function LetterList({ activeMember, letters, isActive }) {
   const navigate = useNavigate();
 
   /** 클릭한 멤버에게 쓴 팬레터만 필터링 */
   const filteredLetters = letters.filter(
     (letter) => letter.writedTo === activeMember
   );
-
   const handleCardClick = (id) => {
     navigate(`/detail/${id}`);
   };
 
   return (
     <section>
-      {filteredLetters
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .map((letter) => (
-          <LetterCard
-            key={letter.id}
-            onClick={() => handleCardClick(letter.id, letters)}
-          >
-            <div>
-              <img src={letter.avatar} alt="사용자 아바타" width="50" />
-            </div>
-            <CardContent>
-              <NickName>{letter.nickname}</NickName>
-              <Letter>{letter.content}</Letter>
-              <WriteDate>{formatDate(letter.createdAt)}</WriteDate>
-            </CardContent>
-          </LetterCard>
-        ))}
+      {filteredLetters.length === 0 ? (
+        <NoLettersYet />
+      ) : (
+        filteredLetters
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map((letter) => (
+            <LetterCard
+              key={letter.id}
+              onClick={() => handleCardClick(letter.id, letters)}
+            >
+              <div>
+                <img src={letter.avatar} alt="사용자 아바타" width="50" />
+              </div>
+              <CardContent>
+                <NickName>{letter.nickname}</NickName>
+                <Letter>{letter.content}</Letter>
+                <WriteDate>{formatDate(letter.createdAt)}</WriteDate>
+              </CardContent>
+            </LetterCard>
+          ))
+      )}
     </section>
   );
 }

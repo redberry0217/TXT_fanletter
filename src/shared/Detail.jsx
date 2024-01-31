@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const DetailBackground = styled.div`
   background-color: #e9f7ff;
@@ -24,7 +24,7 @@ const DetailCard = styled.div`
   background-color: #ffffff;
   border-radius: 15px;
   width: 800px;
-  height: 500px;
+  height: 470px;
   margin: 35px;
   padding: 30px;
   display: flex;
@@ -84,10 +84,80 @@ const StyledBtn = styled.button`
   cursor: pointer;
 `;
 
-function Detail() {
+const TextareaStyle = styled.textarea`
+  height: 200px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 7px;
+`;
+
+function Detail({ letters, setLetters }) {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const letter = letters.find((letter) => letter.id.toString() === id);
+
+  if (!letter) {
+    alert("해당 팬레터를 찾을 수 없습니다.");
+    navigate(`/`);
+  }
+
   const handleGobackClick = () => {
     navigate(`/`);
+  };
+
+  const handleDelete = (id) => {
+    const deleteConfirm = window.confirm("팬레터를 삭제하시겠습니까?");
+    if (deleteConfirm) {
+      setLetters((prevletters) => {
+        const newLetters = prevletters.filter((letter) => letter.id !== id);
+        return [...newLetters];
+      });
+      navigate(`/`);
+    } else {
+      return;
+    }
+  };
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState("");
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setEditedContent(letter.content);
+  };
+
+  const handleSaveClick = () => {
+    if (!editedContent) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    if (editedContent.trim() === letter.content.trim()) {
+      alert("변경된 내용이 없습니다.");
+      return;
+    }
+    // 클라이언트 측에서만 상태를 업데이트하는 예시입니다.
+    setLetters((prevLetters) => {
+      const updatedLetters = prevLetters.map((item) => {
+        if (item.id === letter.id) {
+          return { ...item, content: editedContent };
+        }
+        return item;
+      });
+      return updatedLetters;
+    });
+
+    setIsEditing(false);
+    setEditedContent("");
+  };
+
+  const handleCancelClick = () => {
+    const cancelConfirm = window.confirm("팬레터 수정을 취소합니다.");
+    if (cancelConfirm) {
+      setIsEditing(false);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -97,24 +167,43 @@ function Detail() {
       </DetailTitle>
       <DetailCard>
         <WriteInfo>
-          <img src="/assets/user_icon.png" width="50" />
-          <NicknameStyle>닉네임</NicknameStyle>
-          <CreateAtStyle>2023. 11. 3. 오전 11:07</CreateAtStyle>
+          <img
+            src={
+              letter.avatar.startsWith("http")
+                ? letter.avatar
+                : `/${letter.avatar}`
+            }
+            width="50"
+          />
+          <NicknameStyle>{letter.nickname}</NicknameStyle>
+          <CreateAtStyle>{formatDate(letter.createdAt)}</CreateAtStyle>
         </WriteInfo>
         <LineStyle />
         <WritedToStyle>
-          TO : <TxT>SOOBIN</TxT>
+          TO : <TxT>{letter.writedTo}</TxT>
         </WritedToStyle>
-        <ContentStyle>
-          수빈짱 Vitae recusandae tenetur debitis impedit ut dolorem atque
-          reprehenderit magnam. Cum dolor magnam commodi qui perferendis. Vel
-          temporibus soluta. Eum delectus blanditiis. Neque dicta non quod ex.
-          Maiores aspernatur fuga reprehenderit a magni eaque fuga voluptatum
-          hic.
-        </ContentStyle>
+        {isEditing ? (
+          <TextareaStyle
+            value={editedContent}
+            onChange={(e) => setEditedContent(e.target.value)}
+            maxLength="100"
+          />
+        ) : (
+          <ContentStyle>{letter.content}</ContentStyle>
+        )}
         <BtnsStyle>
-          <StyledBtn>수정하기</StyledBtn>
-          <StyledBtn>삭제하기</StyledBtn>
+          {isEditing ? (
+            <StyledBtn onClick={handleSaveClick}>✔️저장하기</StyledBtn>
+          ) : (
+            <StyledBtn onClick={handleEditClick}>✏️수정하기</StyledBtn>
+          )}
+          {isEditing ? (
+            <StyledBtn onClick={handleCancelClick}>✖️취소하기</StyledBtn>
+          ) : (
+            <StyledBtn onClick={() => handleDelete(letter.id)}>
+              ❌삭제하기
+            </StyledBtn>
+          )}
         </BtnsStyle>
       </DetailCard>
       <StyledBtn onClick={handleGobackClick} title="홈으로 돌아갑니다">
@@ -123,5 +212,17 @@ function Detail() {
     </DetailBackground>
   );
 }
+
+const formatDate = (dateString) => {
+  const options = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("ko-KR", options);
+};
 
 export default Detail;

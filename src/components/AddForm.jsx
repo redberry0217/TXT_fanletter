@@ -115,7 +115,7 @@ function AddForm({ letters, setLetters }) {
           />
         </div>
         <SubmitBtnBox>
-          <StyledBtn type="submit">등록하기</StyledBtn>
+          <StyledBtn type="submit">✔️등록하기</StyledBtn>
         </SubmitBtnBox>
       </form>
     </WriteBox>

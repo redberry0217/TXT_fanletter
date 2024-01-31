@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
-import MemberClicked from "./MemberClicked"
+import MemberClicked from "./MemberClicked";
 import { useState } from "react";
 
 const TitleBox = styled.div`
@@ -23,19 +23,27 @@ const H1Style = styled.h1`
   margin-left: 70px;
 `;
 
-function Layout(props) {
-  const [activeMember, setActiveMember] = useState('');
+function Layout({ letters, setLetters }) {
+  const [activeMember, setActiveMember] = useState("");
 
   return (
     <>
       <TitleBox>
         <H1Style>
-          from MOA to<br />
+          from MOA to
+          <br />
           <TitlefontColor>TOMORROW X TOGETHER</TitlefontColor>
         </H1Style>
       </TitleBox>
-      <HeaderMenu activeMember={activeMember} setActiveMember={setActiveMember}/>
-      <MemberClicked activeMember={activeMember}/>
+      <HeaderMenu
+        activeMember={activeMember}
+        setActiveMember={setActiveMember}
+      />
+      <MemberClicked
+        activeMember={activeMember}
+        letters={letters}
+        setLetters={setLetters}
+      />
     </>
   );
 }

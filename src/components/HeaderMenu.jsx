@@ -12,7 +12,7 @@ const MenuBackground = styled.div`
 const MemberBox = styled.div`
   height: 20px;
   margin-left: 10px;
-  margin-right: 10px; 
+  margin-right: 10px;
   font-weight: bold;
   letter-spacing: 2px;
   cursor: pointer;
@@ -21,7 +21,7 @@ const MemberBox = styled.div`
 
 const Members = ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN", "HUENINGKAI"];
 
-function HeaderMenu({ activeMember, setActiveMember } ) {
+function HeaderMenu({ activeMember, setActiveMember }) {
   useEffect(() => {
     setActiveMember("SOOBIN");
   }, []);
