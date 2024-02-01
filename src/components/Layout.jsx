@@ -23,8 +23,8 @@ const H1Style = styled.h1`
   margin-left: 70px;
 `;
 
-function Layout({ letters, setLetters }) {
-  const [activeMember, setActiveMember] = useState("");
+function Layout({ letters, setLetters, toWhom }) {
+  const [activeMember, setActiveMember] = useState(toWhom || "SOOBIN");
 
   return (
     <>
@@ -38,11 +38,14 @@ function Layout({ letters, setLetters }) {
       <HeaderMenu
         activeMember={activeMember}
         setActiveMember={setActiveMember}
+        toWhom={toWhom}
       />
       <MemberClicked
         activeMember={activeMember}
+        setActiveMember={setActiveMember}
         letters={letters}
         setLetters={setLetters}
+        toWhom={toWhom}
       />
     </>
   );

@@ -53,7 +53,7 @@ const SubmitBtnBox = styled.div`
   display: flex;
   justify-content: center;
 `;
-function AddForm({ letters, setLetters }) {
+function AddForm({ setLetters, setActiveMember }) {
   const [nickname, setNickname] = useState("");
   const [writedTo, setWritedTo] = useState("SOOBIN");
   const [content, setContent] = useState("");
@@ -78,6 +78,8 @@ function AddForm({ letters, setLetters }) {
       setNickname("");
       setContent("");
       setWritedTo("SOOBIN");
+
+      setActiveMember(writedTo);
     }
   };
   return (

@@ -79,6 +79,8 @@ function Detail({ letters, setLetters }) {
 
   const letter = letters.find((letter) => letter.id.toString() === id);
 
+  const toWhom = letter.writedTo;
+
   if (!letter) {
     alert("해당 팬레터를 찾을 수 없습니다.");
     navigate(`/`);
@@ -97,7 +99,13 @@ function Detail({ letters, setLetters }) {
         const newLetters = prevletters.filter((letter) => letter.id !== id);
         return [...newLetters];
       });
-      navigate(`/`);
+
+      // (2) 원래 메인에서 누가 선택돼있었는지 알아야 함
+      navigate(`/`, {
+        state: {
+          previousValue: toWhom,
+        },
+      });
     } else {
       return;
     }

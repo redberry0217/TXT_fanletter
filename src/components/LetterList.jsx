@@ -42,7 +42,7 @@ const WriteDate = styled.p`
   margin-top: 35px;
 `;
 
-function LetterList({ activeMember, letters, isActive }) {
+function LetterList({ activeMember, letters }) {
   const navigate = useNavigate();
 
   /** 클릭한 멤버에게 쓴 팬레터만 필터링 */
@@ -50,20 +50,21 @@ function LetterList({ activeMember, letters, isActive }) {
     (letter) => letter.writedTo === activeMember
   );
   const handleCardClick = (id) => {
+    // (1) detail로 갔을 때, 현재 누구로 선택돼있는지 알 필요가 있다.
     navigate(`/detail/${id}`);
   };
 
   return (
     <section>
       {filteredLetters.length === 0 ? (
-        <NoLettersYet />
+        <NoLettersYet activeMember={activeMember} />
       ) : (
         filteredLetters
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map((letter) => (
             <LetterCard
               key={letter.id}
-              onClick={() => handleCardClick(letter.id, letters)}
+              onClick={() => handleCardClick(letter.id, letters, activeMember)}
             >
               <div>
                 <img src={letter.avatar} alt="사용자 아바타" width="50" />
