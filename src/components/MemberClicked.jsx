@@ -11,10 +11,15 @@ const FanletterBox = styled.div`
   margin-top: 35px;
   margin-bottom: 35px;
 `;
-function MemberClicked({ activeMember, letters, setLetters }) {
+function MemberClicked({ activeMember, setActiveMember, letters, setLetters }) {
   return (
     <FanletterBox>
-      <AddForm letters={letters} setLetters={setLetters} />
+      <AddForm
+        letters={letters}
+        setLetters={setLetters}
+        activeMember={activeMember}
+        setActiveMember={setActiveMember}
+      />
       <LetterList activeMember={activeMember} letters={letters} />
     </FanletterBox>
   );

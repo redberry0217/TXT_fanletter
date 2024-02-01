@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const MenuBackground = styled.div`
@@ -22,10 +22,6 @@ const MemberBox = styled.div`
 const Members = ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN", "HUENINGKAI"];
 
 function HeaderMenu({ activeMember, setActiveMember }) {
-  useEffect(() => {
-    setActiveMember("SOOBIN");
-  }, []);
-
   return (
     <>
       <MenuBackground>
