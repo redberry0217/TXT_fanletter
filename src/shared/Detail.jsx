@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import WriterDetail from "components/WriterDetail";
+import { FanletterContext } from "context/FanletterContext";
 
 const DetailBackground = styled.div`
   background-color: #e9f7ff;
@@ -73,11 +74,14 @@ const TextareaStyle = styled.textarea`
   border-radius: 7px;
 `;
 
-function Detail({ letters, setLetters }) {
+function Detail() {
+  const letterData = useContext(FanletterContext);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const letter = letters.find((letter) => letter.id.toString() === id);
+  const letter = letterData.letters.find(
+    (letter) => letter.id.toString() === id
+  );
 
   const toWhom = letter.writedTo;
 
@@ -95,7 +99,7 @@ function Detail({ letters, setLetters }) {
   const handleDelete = (id) => {
     const deleteConfirm = window.confirm("팬레터를 삭제하시겠습니까?");
     if (deleteConfirm) {
-      setLetters((prevletters) => {
+      letterData.setLetters((prevletters) => {
         const newLetters = prevletters.filter((letter) => letter.id !== id);
         return [...newLetters];
       });
@@ -134,7 +138,7 @@ function Detail({ letters, setLetters }) {
     }
 
     // 변경된 내용이 있을 때
-    setLetters((prevLetters) => {
+    letterData.setLetters((prevLetters) => {
       const updatedLetters = prevLetters.map((item) => {
         if (item.id === letter.id) {
           return { ...item, content: editedContent };

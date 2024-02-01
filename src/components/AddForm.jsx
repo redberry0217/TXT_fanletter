@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import { FanletterContext } from "context/FanletterContext";
 
 const WriteBox = styled.div`
   width: 650px;
@@ -53,7 +54,8 @@ const SubmitBtnBox = styled.div`
   display: flex;
   justify-content: center;
 `;
-function AddForm({ setLetters, setActiveMember }) {
+function AddForm({ setActiveMember }) {
+  const letterData = useContext(FanletterContext);
   const [nickname, setNickname] = useState("");
   const [writedTo, setWritedTo] = useState("SOOBIN");
   const [content, setContent] = useState("");
@@ -74,7 +76,7 @@ function AddForm({ setLetters, setActiveMember }) {
         avatar: "assets/user_icon.png",
       };
 
-      setLetters((prevletters) => [...prevletters, newLetter]);
+      letterData.setLetters((prevletters) => [...prevletters, newLetter]);
       setNickname("");
       setContent("");
       setWritedTo("SOOBIN");

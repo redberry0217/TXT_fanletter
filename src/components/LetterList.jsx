@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NoLettersYet from "./NoLettersYet";
+import { FanletterContext } from "context/FanletterContext";
 
 const LetterCard = styled.div`
   border: 1px solid gray;
@@ -42,11 +43,12 @@ const WriteDate = styled.p`
   margin-top: 35px;
 `;
 
-function LetterList({ activeMember, letters }) {
+function LetterList({ activeMember }) {
   const navigate = useNavigate();
+  const letterData = useContext(FanletterContext);
 
   /** 클릭한 멤버에게 쓴 팬레터만 필터링 */
-  const filteredLetters = letters.filter(
+  const filteredLetters = letterData.letters.filter(
     (letter) => letter.writedTo === activeMember
   );
   const handleCardClick = (id) => {
@@ -64,7 +66,9 @@ function LetterList({ activeMember, letters }) {
           .map((letter) => (
             <LetterCard
               key={letter.id}
-              onClick={() => handleCardClick(letter.id, letters, activeMember)}
+              onClick={() =>
+                handleCardClick(letter.id, letterData.letters, activeMember)
+              }
             >
               <div>
                 <img src={letter.avatar} alt="사용자 아바타" width="50" />
