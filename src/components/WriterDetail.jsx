@@ -25,6 +25,7 @@ function WriterDetail({ letter }) {
           }
           width="50"
           alt="사용자 이미지"
+          style={{ borderRadius: "50%" }}
         />
         <NicknameStyle>{letter.nickname}</NicknameStyle>
         <CreateAtStyle>{formatDate(letter.createdAt)}</CreateAtStyle>

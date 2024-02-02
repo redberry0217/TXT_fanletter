@@ -15,7 +15,6 @@ function Detail() {
   const letter = letterData.letters.find(
     (letter) => letter.id.toString() === id
   );
-
   const toWhom = letter.writedTo;
 
   if (!letter) {
@@ -23,7 +22,7 @@ function Detail() {
     navigate(`/`);
   }
 
-  /** 뒤로가기 버튼  */
+  /** 돌아가기 버튼  */
   const handleGobackClick = () => {
     navigate(`/`, {
       state: {
@@ -37,11 +36,7 @@ function Detail() {
     const deleteConfirm = window.confirm("팬레터를 삭제하시겠습니까?");
     if (deleteConfirm) {
       dispatch(deleteLetter(id));
-      navigate(`/`, {
-        state: {
-          previousValue: toWhom,
-        },
-      });
+      handleGobackClick();
     } else {
       return;
     }

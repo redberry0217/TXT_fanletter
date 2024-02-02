@@ -31,7 +31,12 @@ function LetterList({ activeMember }) {
               }
             >
               <div>
-                <img src={letter.avatar} alt="사용자 아바타" width="50" />
+                <img
+                  src={letter.avatar}
+                  alt="사용자 아바타"
+                  width="50"
+                  style={{ borderRadius: "50%" }}
+                />
               </div>
               <CardContent>
                 <NickName>{letter.nickname}</NickName>
