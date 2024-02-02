@@ -1,25 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const WriteInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-`;
-
-const NicknameStyle = styled.div`
-  width: 250px;
-  margin-left: 20px;
-  font-weight: bold;
-`;
-
-const CreateAtStyle = styled.div`
-  margin-left: 230px;
-  font-weight: bold;
-  color: gray;
-`;
-
 const formatDate = (dateString) => {
   const options = {
     year: "numeric",
@@ -51,5 +32,25 @@ function WriterDetail({ letter }) {
     </div>
   );
 }
+
+/** Styled-components */
+const WriteInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+`;
+
+const NicknameStyle = styled.div`
+  width: 250px;
+  margin-left: 20px;
+  font-weight: bold;
+`;
+
+const CreateAtStyle = styled.div`
+  margin-left: 230px;
+  font-weight: bold;
+  color: gray;
+`;
 
 export default WriterDetail;

@@ -1,19 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const NoLettersMsg = styled.div`
-  margin: 35px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 2;
-`;
-
-const TxT = styled.span`
-  color: #4b85d0;
-  font-weight: bold;
-`;
-
 function NoLettersYet({ activeMember }) {
   return (
     <NoLettersMsg>
@@ -27,4 +14,17 @@ function NoLettersYet({ activeMember }) {
   );
 }
 
+/** Styled-components */
+const NoLettersMsg = styled.div`
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 2;
+`;
+
+const TxT = styled.span`
+  color: #4b85d0;
+  font-weight: bold;
+`;
 export default NoLettersYet;
