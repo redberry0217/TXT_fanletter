@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { addLetter } from "../redux/modules/updateLetter";
+import Button from "./common/Button";
 
 function AddForm({ setActiveMember }) {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function AddForm({ setActiveMember }) {
     <WriteBox>
       <form onSubmit={handleSubmit}>
         <div>
-          닉네임{" "}
+          <label>닉네임</label>
           <StyledInput
             type="text"
             placeholder="최대 20자 입력 가능"
@@ -45,7 +46,7 @@ function AddForm({ setActiveMember }) {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
-          받는 멤버
+          <label>받는 멤버</label>
           <StyledSelect
             value={writedTo}
             onChange={(e) => setWritedTo(e.target.value)}
@@ -58,7 +59,7 @@ function AddForm({ setActiveMember }) {
           </StyledSelect>
         </div>
         <div>
-          내용
+          <label>내용</label>
           <br />
           <StyledTextarea
             placeholder="최대 100자 작성 가능"
@@ -67,9 +68,7 @@ function AddForm({ setActiveMember }) {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <SubmitBtnBox>
-          <StyledBtn type="submit">✔️등록하기</StyledBtn>
-        </SubmitBtnBox>
+        <Button text="✔️등록하기" />
       </form>
     </WriteBox>
   );
@@ -104,16 +103,6 @@ const StyledSelect = styled.select`
   border-radius: 7px;
 `;
 
-const StyledBtn = styled.button`
-  width: 120px;
-  margin-top: 20px;
-  padding: 5px;
-  background-color: #d1d8e0;
-  border: 0px;
-  border-radius: 7px;
-  cursor: pointer;
-`;
-
 const StyledTextarea = styled.textarea`
   margin-top: 10px;
   margin-bottom: 10px;
@@ -122,10 +111,7 @@ const StyledTextarea = styled.textarea`
   height: 70px;
   border: 1px solid grey;
   border-radius: 7px;
-`;
-const SubmitBtnBox = styled.div`
-  display: flex;
-  justify-content: center;
+  resize: none;
 `;
 
 export default AddForm;

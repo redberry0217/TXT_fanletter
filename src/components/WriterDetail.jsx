@@ -1,17 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-const formatDate = (dateString) => {
-  const options = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  };
-  const date = new Date(dateString);
-  return date.toLocaleDateString("ko-KR", options);
-};
+import { getFormatDate } from "util/date";
 
 function WriterDetail({ letter }) {
   return (
@@ -28,7 +17,7 @@ function WriterDetail({ letter }) {
           style={{ borderRadius: "50%" }}
         />
         <NicknameStyle>{letter.nickname}</NicknameStyle>
-        <CreateAtStyle>{formatDate(letter.createdAt)}</CreateAtStyle>
+        <CreateAtStyle>{getFormatDate(letter.createdAt)}</CreateAtStyle>
       </WriteInfo>
     </div>
   );

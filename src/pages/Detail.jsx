@@ -5,6 +5,7 @@ import WriterDetail from "components/WriterDetail";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteLetter } from "../redux/modules/updateLetter";
 import { modifyLetter } from "../redux/modules/updateLetter";
+import Button from "components/common/Button";
 
 function Detail() {
   const letterData = useSelector((state) => state.updateLetter);
@@ -102,29 +103,29 @@ function Detail() {
         )}
         <BtnsStyle>
           {isEditing ? (
-            <StyledBtn onClick={handleSaveClick}>✔️저장하기</StyledBtn>
+            <Button onClick={handleSaveClick} text="✔️저장하기" />
           ) : (
-            <StyledBtn onClick={handleEditClick}>✏️수정하기</StyledBtn>
+            <Button onClick={handleEditClick} text="✏️수정하기" />
           )}
           {isEditing ? (
-            <StyledBtn onClick={handleCancelClick}>✖️취소하기</StyledBtn>
+            <Button onClick={handleCancelClick} text="✖️취소하기" />
           ) : (
-            <StyledBtn onClick={() => handleDelete(letter.id)}>
-              ❌삭제하기
-            </StyledBtn>
+            <Button onClick={() => handleDelete(letter.id)} text="❌삭제하기" />
           )}
         </BtnsStyle>
       </DetailCard>
-      <StyledBtn onClick={handleGobackClick} title="홈으로 돌아갑니다">
-        🏠 돌아가기
-      </StyledBtn>
+      <Button
+        onClick={handleGobackClick}
+        title="홈으로 돌아갑니다"
+        text="🏠 돌아가기"
+      />
     </DetailBackground>
   );
 }
 
 const DetailBackground = styled.div`
   background-color: #e9f7ff;
-  height: 910px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,19 +171,13 @@ const ContentStyle = styled.div`
 `;
 
 const BtnsStyle = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   margin-top: 50px;
   margin-right: 10px;
   text-align: right;
-`;
-
-const StyledBtn = styled.button`
-  width: 120px;
-  margin: 5px;
-  padding: 5px;
-  background-color: #d1d8e0;
-  border: 0px;
-  border-radius: 7px;
-  cursor: pointer;
+  gap: 12px;
 `;
 
 const TextareaStyle = styled.textarea`
@@ -190,6 +185,7 @@ const TextareaStyle = styled.textarea`
   padding: 5px;
   border: 1px solid grey;
   border-radius: 7px;
+  resize: none;
 `;
 
 export default Detail;

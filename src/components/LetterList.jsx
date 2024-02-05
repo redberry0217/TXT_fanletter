@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NoLettersYet from "./NoLettersYet";
 import { useSelector } from "react-redux";
+import { getFormatDate } from "util/date";
 
 function LetterList({ activeMember }) {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function LetterList({ activeMember }) {
               <CardContent>
                 <NickName>{letter.nickname}</NickName>
                 <Letter>{letter.content}</Letter>
-                <WriteDate>{formatDate(letter.createdAt)}</WriteDate>
+                <WriteDate>{getFormatDate(letter.createdAt)}</WriteDate>
               </CardContent>
             </LetterCard>
           ))
@@ -49,19 +50,6 @@ function LetterList({ activeMember }) {
     </section>
   );
 }
-
-/** fakeData.json 내 createdAt 정보를 원하는 형식으로 가공 */
-const formatDate = (dateString) => {
-  const options = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  };
-  const date = new Date(dateString);
-  return date.toLocaleDateString("ko-KR", options);
-};
 
 /** Styled-Componenets */
 const LetterCard = styled.div`
@@ -73,6 +61,10 @@ const LetterCard = styled.div`
   flex-direction: row;
   padding: 30px;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
+  transition: all 0.2s;
 `;
 
 const CardContent = styled.div`
@@ -90,11 +82,9 @@ const Letter = styled.p`
   line-height: 1.2;
   margin-top: 15px;
   margin-bottom: 15px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
 `;
 
 const WriteDate = styled.p`

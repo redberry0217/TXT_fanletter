@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderMenu from "./HeaderMenu";
-import MemberClicked from "./MemberClicked";
-import { useState } from "react";
 
-function Layout({ toWhom }) {
-  const [activeMember, setActiveMember] = useState(toWhom || "SOOBIN");
-
+function Layout() {
   return (
     <>
       <TitleBox>
@@ -16,16 +11,6 @@ function Layout({ toWhom }) {
           <TitlefontColor>TOMORROW X TOGETHER</TitlefontColor>
         </H1Style>
       </TitleBox>
-      <HeaderMenu
-        activeMember={activeMember}
-        setActiveMember={setActiveMember}
-        toWhom={toWhom}
-      />
-      <MemberClicked
-        activeMember={activeMember}
-        setActiveMember={setActiveMember}
-        toWhom={toWhom}
-      />
     </>
   );
 }
