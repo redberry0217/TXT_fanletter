@@ -4,25 +4,6 @@ import HeaderMenu from "./HeaderMenu";
 import MemberClicked from "./MemberClicked";
 import { useState } from "react";
 
-const TitleBox = styled.div`
-  margin: 0;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  height: 230px;
-  background-image: url("assets/txt.jpg");
-`;
-
-const TitlefontColor = styled.span`
-  color: #4b85d0;
-`;
-
-const H1Style = styled.h1`
-  font-size: 28pt;
-  font-weight: bold;
-  margin-left: 70px;
-`;
-
 function Layout({ toWhom }) {
   const [activeMember, setActiveMember] = useState(toWhom || "SOOBIN");
 
@@ -48,5 +29,24 @@ function Layout({ toWhom }) {
     </>
   );
 }
+
+const TitleBox = styled.div`
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 230px;
+  background-image: url("assets/txt.jpg");
+`;
+
+const TitlefontColor = styled.span`
+  color: #4b85d0;
+`;
+
+const H1Style = styled.h1`
+  font-size: 28pt;
+  font-weight: bold;
+  margin-left: 70px;
+`;
 
 export default Layout;

@@ -4,45 +4,6 @@ import styled from "styled-components";
 import NoLettersYet from "./NoLettersYet";
 import { FanletterContext } from "context/FanletterContext";
 
-const LetterCard = styled.div`
-  border: 1px solid gray;
-  border-radius: 15px;
-  margin-top: 35px;
-  width: 650px;
-  display: flex;
-  flex-direction: row;
-  padding: 30px;
-  cursor: pointer;
-`;
-
-const CardContent = styled.div`
-  margin-left: 30px;
-  width: 100%;
-  overflow: hidden;
-`;
-const NickName = styled.p`
-  font-weight: bold;
-  line-height: 1;
-`;
-
-const Letter = styled.p`
-  font-size: 20pt;
-  line-height: 1.2;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-`;
-
-const WriteDate = styled.p`
-  text-align: right;
-  line-height: 1;
-  margin-top: 35px;
-`;
-
 function LetterList({ activeMember }) {
   const navigate = useNavigate();
   const letterData = useContext(FanletterContext);
@@ -97,5 +58,42 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString("ko-KR", options);
 };
+
+const LetterCard = styled.div`
+  border: 1px solid gray;
+  border-radius: 15px;
+  margin-top: 35px;
+  width: 650px;
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+  cursor: pointer;
+`;
+
+const CardContent = styled.div`
+  margin-left: 30px;
+  width: 100%;
+  overflow: hidden;
+`;
+const NickName = styled.p`
+  font-weight: bold;
+  line-height: 1;
+`;
+
+const Letter = styled.p`
+  font-size: 20pt;
+  line-height: 1.2;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const WriteDate = styled.p`
+  text-align: right;
+  line-height: 1;
+  margin-top: 35px;
+`;
 
 export default LetterList;

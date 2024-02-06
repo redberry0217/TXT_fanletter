@@ -1,6 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 
+function WriterDetail({ letter }) {
+  return (
+    <div>
+      <WriteInfo>
+        <img
+          src={
+            letter.avatar.startsWith("http")
+              ? letter.avatar
+              : `/${letter.avatar}`
+          }
+          width="50"
+          alt="사용자 이미지"
+        />
+        <NicknameStyle>{letter.nickname}</NicknameStyle>
+        <CreateAtStyle>{formatDate(letter.createdAt)}</CreateAtStyle>
+      </WriteInfo>
+    </div>
+  );
+}
+
 const WriteInfo = styled.div`
   display: flex;
   flex-direction: row;
@@ -28,28 +48,9 @@ const formatDate = (dateString) => {
     hour: "numeric",
     minute: "numeric",
   };
+
   const date = new Date(dateString);
   return date.toLocaleDateString("ko-KR", options);
 };
-
-function WriterDetail({ letter }) {
-  return (
-    <div>
-      <WriteInfo>
-        <img
-          src={
-            letter.avatar.startsWith("http")
-              ? letter.avatar
-              : `/${letter.avatar}`
-          }
-          width="50"
-          alt="사용자 이미지"
-        />
-        <NicknameStyle>{letter.nickname}</NicknameStyle>
-        <CreateAtStyle>{formatDate(letter.createdAt)}</CreateAtStyle>
-      </WriteInfo>
-    </div>
-  );
-}
 
 export default WriterDetail;

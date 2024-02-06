@@ -4,76 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import WriterDetail from "components/WriterDetail";
 import { FanletterContext } from "context/FanletterContext";
 
-const DetailBackground = styled.div`
-  background-color: #e9f7ff;
-  height: 910px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const DetailTitle = styled.p`
-  font-size: 23pt;
-  font-weight: bold;
-`;
-
-const TxT = styled.span`
-  color: #4b85d0;
-`;
-
-const DetailCard = styled.div`
-  background-color: #ffffff;
-  border-radius: 15px;
-  width: 800px;
-  height: 470px;
-  margin: 35px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const LineStyle = styled.div`
-  margin-top: 20px;
-  margin-bottom: 20px;
-  height: 1px;
-  background-color: gray;
-`;
-
-const WritedToStyle = styled.div`
-  padding: 10px;
-  font-weight: bold;
-`;
-
-const ContentStyle = styled.div`
-  padding: 10px;
-  font-size: 18pt;
-  line-height: 1.5;
-`;
-
-const BtnsStyle = styled.div`
-  margin-top: 50px;
-  margin-right: 10px;
-  text-align: right;
-`;
-
-const StyledBtn = styled.button`
-  width: 120px;
-  margin: 5px;
-  padding: 5px;
-  background-color: #d1d8e0;
-  border: 0px;
-  border-radius: 7px;
-  cursor: pointer;
-`;
-
-const TextareaStyle = styled.textarea`
-  height: 200px;
-  padding: 5px;
-  border: 1px solid grey;
-  border-radius: 7px;
-`;
-
 function Detail() {
   const letterData = useContext(FanletterContext);
   const navigate = useNavigate();
@@ -203,5 +133,75 @@ function Detail() {
     </DetailBackground>
   );
 }
+
+const DetailBackground = styled.div`
+  background-color: #e9f7ff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const DetailTitle = styled.p`
+  font-size: 23pt;
+  font-weight: bold;
+`;
+
+const TxT = styled.span`
+  color: #4b85d0;
+`;
+
+const DetailCard = styled.div`
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 800px;
+  height: 470px;
+  margin: 35px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const LineStyle = styled.div`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 1px;
+  background-color: gray;
+`;
+
+const WritedToStyle = styled.div`
+  padding: 10px;
+  font-weight: bold;
+`;
+
+const ContentStyle = styled.div`
+  padding: 10px;
+  font-size: 18pt;
+  line-height: 1.5;
+`;
+
+const BtnsStyle = styled.div`
+  margin-top: 50px;
+  margin-right: 10px;
+  text-align: right;
+`;
+
+const StyledBtn = styled.button`
+  width: 120px;
+  margin: 5px;
+  padding: 5px;
+  background-color: #d1d8e0;
+  border: 0px;
+  border-radius: 7px;
+  cursor: pointer;
+`;
+
+const TextareaStyle = styled.textarea`
+  height: 200px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 7px;
+`;
 
 export default Detail;
