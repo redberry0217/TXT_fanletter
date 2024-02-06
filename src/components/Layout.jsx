@@ -21,7 +21,7 @@ const TitleBox = styled.div`
   display: flex;
   align-items: center;
   height: 230px;
-  background-image: url("assets/txt.jpg");
+  background-image: url(${process.env.PUBLIC_URL}/assets/txt.jpg);
 `;
 
 const TitlefontColor = styled.span`
