@@ -22,30 +22,28 @@ function LetterList({ activeMember }) {
       {filteredLetters.length === 0 ? (
         <NoLettersYet activeMember={activeMember} />
       ) : (
-        filteredLetters
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          .map((letter) => (
-            <LetterCard
-              key={letter.id}
-              onClick={() =>
-                handleCardClick(letter.id, letterData.letters, activeMember)
-              }
-            >
-              <div>
-                <img
-                  src={letter.avatar}
-                  alt="사용자 아바타"
-                  width="50"
-                  style={{ borderRadius: "50%" }}
-                />
-              </div>
-              <CardContent>
-                <NickName>{letter.nickname}</NickName>
-                <Letter>{letter.content}</Letter>
-                <WriteDate>{getFormatDate(letter.createdAt)}</WriteDate>
-              </CardContent>
-            </LetterCard>
-          ))
+        filteredLetters.map((letter) => (
+          <LetterCard
+            key={letter.id}
+            onClick={() =>
+              handleCardClick(letter.id, letterData.letters, activeMember)
+            }
+          >
+            <div>
+              <img
+                src={letter.avatar}
+                alt="사용자 아바타"
+                width="50"
+                style={{ borderRadius: "50%" }}
+              />
+            </div>
+            <CardContent>
+              <NickName>{letter.nickname}</NickName>
+              <Letter>{letter.content}</Letter>
+              <WriteDate>{getFormatDate(letter.createdAt)}</WriteDate>
+            </CardContent>
+          </LetterCard>
+        ))
       )}
     </section>
   );

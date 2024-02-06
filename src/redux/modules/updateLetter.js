@@ -1,8 +1,8 @@
 import fakeData from "fakeData.json";
 
-export const ADD_LETTER = "ADD_LETTER";
-export const DELETE_LETTER = "DELETE_LETTER";
-export const MODIFY_LETTER = "MODIFY_LETTER";
+export const ADD_LETTER = "updateLetter/ADD_LETTER";
+export const DELETE_LETTER = "updateLetter/DELETE_LETTER";
+export const MODIFY_LETTER = "updateLetter/MODIFY_LETTER";
 
 export const addLetter = (payload) => ({
   type: ADD_LETTER,
@@ -29,21 +29,19 @@ const initialState = {
 const updateLetter = (state = initialState, action) => {
   switch (action.type) {
     case ADD_LETTER:
+      const newLetter = action.payload;
       return {
-        ...state,
-        letters: [...state.letters, action.payload],
+        letters: [newLetter, ...state.letters],
       };
 
     case DELETE_LETTER:
       return {
-        ...state,
         letters: state.letters.filter((letter) => letter.id !== action.payload),
       };
 
     case MODIFY_LETTER:
       const { letterId, editedContent } = action.payload;
       return {
-        ...state,
         letters: state.letters.map((letter) =>
           letter.id === letterId
             ? { ...letter, content: editedContent }
