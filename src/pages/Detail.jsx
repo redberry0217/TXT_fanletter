@@ -97,6 +97,7 @@ function Detail() {
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
             maxLength="100"
+            autoFocus
           />
         ) : (
           <ContentStyle>{letter.content}</ContentStyle>
